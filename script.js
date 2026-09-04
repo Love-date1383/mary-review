@@ -24,7 +24,7 @@ const copy = {
   },
   page4: {
     title: "چرا هنوز تو…",
-    text: "مری، بین همه‌ی چیزایی که تو رو برای من خاص می‌کنه، مهربونیت همیشه یه جای دیگه داشته.\n\nمهربونی تو فقط یه اخلاق خوب نبود؛ چیزی بود که کنارت بهم آرامش می‌داد.\n\nهنوز اولین باری که دستتو گرفتم یادمه. شاید از بیرون یه لحظه‌ی ساده بود، ولی برای من اصلاً ساده نبود. همون لحظه یه حسی رو تجربه کردم که قبل از تو تجربه نکرده بودم.\n\nمن کنار تو فقط خوشحال نبودم؛ عاشق بودم. حس عشق رو فقط کنار تو شناختم و هنوزم وقتی به عشق فکر می‌کنم، اولین کسی که میاد توی ذهنم تویی.\n\nاین مدت و این فاصله نتونسته ارزش تو رو برای من کم کنه. تو هنوزم همون آدمی هستی که دلم می‌خواد باهاش یه شروع درست، قشنگ و موندگار بسازم."
+    text: "مری، بین همه‌ی چیزایی که تو رو برای من خاص می‌کنه، مهربونیت همیشه یه جای دیگه داشته.\n\nمهربونی تو فقط یه اخلاق خوب نبود؛ چیزی بود که کنارت بهم آرامش می‌داد.\n\nهنوز اولین باری که دستتو گرفتم یادمه. شاید از بیرون یه لحظه‌ی ساده بود، ولی برای من اصلاً ساده نبود. همون لحظه یه حسی رو تجربه کردم که قبل از تو تجربه نکرده بودم.\n\nمن کنار تو فقط خوشحال نبودم؛ عاشق بودم. حس عشق رو فقط کنار تو شناختم و هنوزم وقتی به عشق فکر می‌کنم، اولین و آخرین کسی که میاد توی ذهنم تویی.\n\nاین مدت و این فاصله نتونسته ارزش تو رو برای من کم کنه. تو هنوزم همون آدمی هستی که دلم می‌خواد باهاش یه شروع درست، قشنگ و موندگار بسازم."
   },
   page5: {
     title: "اولین چیزی که ساختم، برای توئه…",
@@ -185,6 +185,35 @@ const proposalYes = document.getElementById("proposalYes");
 const proposalThink = document.getElementById("proposalThink");
 let selectedChoice = "";
 
+const TELEGRAM_WORKER_URL =
+  "https://young-fog-4863.chegeni45.workers.dev";
+
+async function sendToTelegram(action, message = "") {
+  try {
+    const response = await fetch(TELEGRAM_WORKER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        action,
+        message
+      })
+    });
+
+    const result = await response.json();
+
+    if (!result.ok) {
+      console.error("Telegram Worker error:", result);
+    }
+
+    return result.ok;
+  } catch (error) {
+    console.error("Telegram connection error:", error);
+    return false;
+  }
+}
+
 function revealChoices() {
   choiceButtons.forEach((button, index) => {
     window.setTimeout(() => button.classList.add("choice-visible"), reduceMotion ? 0 : index * 150);
@@ -226,6 +255,14 @@ page6Btn.addEventListener("click", async () => {
     if (selectedChoice === "message") {
       localStorage.setItem("marySiteMessage", maryMessage.value.trim());
     }
+
+if (selectedChoice === "message") {
+  await sendToTelegram(
+    "💌 یه حرف از خودش",
+    maryMessage.value.trim() || "پیامی نوشته نشده"
+  );
+}
+
   } catch (error) {
     // بازشدن نامه به حافظه‌ی مرورگر وابسته نیست.
   }
@@ -260,7 +297,7 @@ function showFinalResponse(message) {
   finalResponse.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
 }
 
-proposalYes.addEventListener("click", () => {
+proposalYes.addEventListener("click", async () => {
   if (!selectedChoice) return;
 
   try {
@@ -269,10 +306,15 @@ proposalYes.addEventListener("click", () => {
     // نمایش نتیجه به حافظه‌ی مرورگر وابسته نیست.
   }
 
+await sendToTelegram(
+  "پاسخ نهایی: بله ❤️",
+  choiceFlows[selectedChoice].yesResponse
+);
+
   showFinalResponse(choiceFlows[selectedChoice].yesResponse);
 });
 
-proposalThink.addEventListener("click", () => {
+proposalThink.addEventListener("click", async () => {
   if (!selectedChoice) return;
 
   try {
@@ -280,6 +322,11 @@ proposalThink.addEventListener("click", () => {
   } catch (error) {
     // نمایش نتیجه به حافظه‌ی مرورگر وابسته نیست.
   }
+
+await sendToTelegram(
+  "پاسخ نهایی: فعلاً فکر می‌کنم 🤍",
+  choiceFlows[selectedChoice].thinkResponse
+);
 
   showFinalResponse(choiceFlows[selectedChoice].thinkResponse);
 });
