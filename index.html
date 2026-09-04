@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1714">
+  <meta name="description" content="یه نامه‌ی شبانه و صادقانه، فقط برای مری">
+  <title>برای مری | یک شروع تازه</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-atmosphere" aria-hidden="true">
+    <span class="mist mist-one"></span>
+    <span class="mist mist-two"></span>
+    <span class="light-dust"></span>
+  </div>
+
+  <header id="progressWrap" class="progress-wrap" aria-label="پیشرفت نامه">
+    <a class="wordmark" href="#" aria-label="شروع نامه">برای مری</a>
+    <div class="progress-meta">
+      <span id="progressText">۱ از ۷</span>
+      <div class="progress-track" aria-hidden="true">
+        <span id="progressBar" class="progress-bar"></span>
+      </div>
+    </div>
+  </header>
+
+  <main id="story" class="story">
+    <section id="page1" class="page hero-page active" aria-labelledby="title">
+      <picture class="hero-picture" aria-hidden="true">
+        <source media="(max-width: 720px)" srcset="assets/hero-mobile.webp">
+        <img src="assets/hero-desktop.webp" alt="" fetchpriority="high">
+      </picture>
+      <div class="hero-shade" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">یه نامه از دل شب</p>
+        <h1 id="title" aria-live="polite"></h1>
+        <p id="text" class="hero-lead"></p>
+        <p class="night-made">این نامه توی همون شب‌هایی شکل گرفت که تا صبح پای ساختنش موندم.</p>
+      </div>
+
+      <button id="startBtn" class="open-letter reveal-btn" type="button" aria-label="نامه‌ی مری را باز کن">
+        <span class="seal-mark">M</span>
+        <span class="open-copy">
+          <strong>نامه رو باز کن</strong>
+          <small>این چند صفحه فقط برای تو ساخته شده</small>
+        </span>
+      </button>
+      <span class="scroll-cue" aria-hidden="true"></span>
+    </section>
+
+    <section id="page2" class="page letter-page" aria-labelledby="letterTitle" hidden>
+      <article id="letter" class="paper-letter">
+        <div class="paper-photo" aria-hidden="true">
+          <img src="assets/white-envelope.webp" alt="">
+        </div>
+        <div class="paper-content">
+          <p class="chapter">فصل اول · حرفای نگفته</p>
+          <h2 id="letterTitle"></h2>
+          <p id="letterText" class="story-text"></p>
+          <button id="nextBtn" class="primary-btn reveal-btn" type="button">صفحه‌ی بعد</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="page3" class="page letter-page" aria-labelledby="page3Title" hidden>
+      <article class="paper-letter paper-sage">
+        <div class="paper-mark" aria-hidden="true">۰۲</div>
+        <div class="paper-content">
+          <p class="chapter">فصل دوم · تغییر، نه در حد حرف</p>
+          <h2 id="page3Title"></h2>
+          <p id="page3Text" class="story-text"></p>
+          <button id="page3Btn" class="primary-btn reveal-btn" type="button">ادامه‌ی نامه</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="page4" class="page letter-page" aria-labelledby="page4Title" hidden>
+      <article class="paper-letter memory-letter">
+        <div class="memory-photo" aria-hidden="true">
+          <img src="assets/red-rose-window.webp" alt="">
+        </div>
+        <div class="paper-content">
+          <p class="chapter">فصل سوم · چیزی که هنوز عوض نشده</p>
+          <h2 id="page4Title"></h2>
+          <p id="page4Text" class="story-text"></p>
+          <button id="page4Btn" class="primary-btn reveal-btn" type="button">صفحه‌ی بعد</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="page5" class="page letter-page" aria-labelledby="page5Title" hidden>
+      <article class="paper-letter code-letter">
+        <div class="code-night" aria-hidden="true">
+          <span>01:47</span>
+          <span>02:36</span>
+          <span>03:58</span>
+          <span>05:12</span>
+        </div>
+        <div class="paper-content">
+          <p class="chapter">فصل چهارم · شب‌هایی که چیزی ساختم</p>
+          <h2 id="page5Title"></h2>
+          <p id="page5Text" class="story-text"></p>
+          <button id="page5Btn" class="primary-btn reveal-btn" type="button">یه صفحه‌ی مهم مونده</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="page6" class="page letter-page" aria-labelledby="page6Title" hidden>
+      <article class="paper-letter choice-letter">
+        <div class="paper-content">
+          <p class="chapter">فصل پنجم · قدم بعدی رو تو انتخاب کن</p>
+          <h2 id="page6Title"></h2>
+          <p id="page6Text" class="story-text"></p>
+
+          <div id="choiceContainer" class="choice-container" aria-label="انتخاب قدم بعدی">
+            <button class="choice-btn restart-choice" data-choice="restart" type="button">
+              <span>از نو شروع کنیم</span>
+              <small>یه فصل تازه، اگه تو هم بخوای</small>
+            </button>
+            <button class="choice-btn" data-choice="message" type="button">
+              <span>یه حرف از خودت</span>
+              <small>هر چیزی که هنوز توی دلت مونده</small>
+            </button>
+          </div>
+
+          <label id="messageLabel" class="message-label" for="maryMessage" hidden>هر چیزی توی دلت مونده، می‌تونی اینجا بنویسی</label>
+          <textarea id="maryMessage" class="message-box" rows="4" maxlength="700" placeholder="حرفت رو اینجا بنویس…" hidden></textarea>
+
+          <button id="page6Btn" class="primary-btn reveal-btn" type="button">انتخابم همینه</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="page7" class="page letter-page final-page" aria-labelledby="page7Title" hidden>
+      <article class="paper-letter final-letter">
+        <div class="final-rose" aria-hidden="true">
+          <img src="assets/red-rose-window.webp" alt="">
+        </div>
+        <div class="paper-content">
+          <p id="page7Chapter" class="chapter">آخرین صفحه · دعوت من</p>
+          <h2 id="page7Title"></h2>
+          <p id="page7Text" class="story-text"></p>
+
+          <div id="proposalBox" class="proposal-box" hidden>
+            <span class="proposal-line" aria-hidden="true"></span>
+            <h3 id="proposalTitle"></h3>
+            <p id="proposalText"></p>
+            <div class="proposal-buttons">
+              <button id="proposalYes" class="primary-btn" type="button">از نو شروع کنیم</button>
+              <button id="proposalThink" class="secondary-btn" type="button">بذار فکر کنم</button>
+            </div>
+          </div>
+
+          <div id="finalResponse" class="final-response" role="status" hidden></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <noscript>برای دیدن این نامه، جاوااسکریپت مرورگرت باید روشن باشه.</noscript>
+  <script src="script.js"></script>
+</body>
+</html>
