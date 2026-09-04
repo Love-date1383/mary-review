@@ -190,6 +190,10 @@ const TELEGRAM_WORKER_URL =
 
 async function sendToTelegram(action, message = "") {
   try {
+    const finalMessage = message.trim()
+      ? `${action}\n\n${message.trim()}`
+      : action;
+
     const response = await fetch(TELEGRAM_WORKER_URL, {
       method: "POST",
       headers: {
@@ -197,7 +201,7 @@ async function sendToTelegram(action, message = "") {
       },
       body: JSON.stringify({
         action,
-        message
+        message: finalMessage
       })
     });
 
@@ -307,8 +311,7 @@ proposalYes.addEventListener("click", async () => {
   }
 
 await sendToTelegram(
-  "پاسخ نهایی: بله ❤️",
-  choiceFlows[selectedChoice].yesResponse
+  "پاسخ نهایی: بله ❤️"
 );
 
   showFinalResponse(choiceFlows[selectedChoice].yesResponse);
@@ -324,8 +327,7 @@ proposalThink.addEventListener("click", async () => {
   }
 
 await sendToTelegram(
-  "پاسخ نهایی: فعلاً فکر می‌کنم 🤍",
-  choiceFlows[selectedChoice].thinkResponse
+  "پاسخ نهایی: فعلاً فکر می‌کنم 🤍"
 );
 
   showFinalResponse(choiceFlows[selectedChoice].thinkResponse);
